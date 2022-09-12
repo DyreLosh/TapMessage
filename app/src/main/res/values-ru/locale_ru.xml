@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TapMessage</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="create_your_account">Создай свой Аккаунт</string>
+    <string name="email_hint">E-mail</string>
+    <string name="paasword_hint">Пароль</string>
+    <string name="sign_up_button">Зарегистрироваться</string>
+    <string name="or_continue_with">или продолжить с</string>
+    <string name="already_have_account">Уже есть аккаунт?</string>
+    <string name="sign_in_button">Войти</string>
+</resources>

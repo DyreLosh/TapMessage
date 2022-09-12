@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "300367784205",
+    "project_id": "tapmessage-7c890",
+    "storage_bucket": "tapmessage-7c890.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:300367784205:android:56b677e36ff571a218a844",
+        "android_client_info": {
+          "package_name": "ru.dyrelosh.tapmessage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "300367784205-6fia4q0ddsab8aohisml67lcsi04nrjc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANbg_maSP6a4k6q7xTFB8saUb_9wfNwn8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "300367784205-6fia4q0ddsab8aohisml67lcsi04nrjc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
