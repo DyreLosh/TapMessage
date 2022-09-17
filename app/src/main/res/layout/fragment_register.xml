@@ -136,34 +136,20 @@
             app:cornerRadius="20dp"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/cocomat_regular"
-            android:text="@string/or_continue_with"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signInWithPasswordButton" />
-
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginBottom="3dp"
             android:clickable="true"
             android:focusable="true"
-            android:layout_marginBottom="3dp"
             app:cardCornerRadius="20dp"
             app:contentPaddingBottom="8dp"
             app:contentPaddingTop="8dp"
-            android:layout_marginHorizontal="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2">
+            app:layout_constraintTop_toBottomOf="@+id/confirmPasswordInputLayout">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -180,12 +166,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/google_text"
-                    android:textSize="18sp"
+                    android:layout_gravity="center"
                     android:layout_marginStart="10dp"
-                    android:textColor="@color/black"
                     android:fontFamily="@font/cocomat_regular"
-                    android:layout_gravity="center"/>
+                    android:text="@string/google_text"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
