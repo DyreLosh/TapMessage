@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "300367784205",
+    "firebase_url": "https://tapmessage-7c890-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "tapmessage-7c890",
     "storage_bucket": "tapmessage-7c890.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "300367784205-vjpn2o38el3qcll7jsq5m6pdqp7c4hq0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.dyrelosh.tapmessage",
+            "certificate_hash": "8b29a221d39d48898d227c1fc8b87726a1991aef"
+          }
+        },
         {
           "client_id": "300367784205-6fia4q0ddsab8aohisml67lcsi04nrjc.apps.googleusercontent.com",
           "client_type": 3
@@ -27,7 +36,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "300367784205-6fia4q0ddsab8aohisml67lcsi04nrjc.apps.googleusercontent.com",
+              "client_id": "300367784205-466hjmn3e0losp6h7la8lboh4skle9gp.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
