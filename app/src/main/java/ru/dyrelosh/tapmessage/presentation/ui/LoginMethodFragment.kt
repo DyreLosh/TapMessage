@@ -81,7 +81,7 @@ class LoginMethodFragment : Fragment() {
         val cridencial = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(cridencial).addOnCompleteListener {
             if (it.isSuccessful) {
-                findNavController().navigate(R.id.action_loginMethodFragment_to_chatFragment)
+                findNavController().navigate(R.id.action_loginMethodFragment_to_loginFragment)
             } else {
                 Toast.makeText(
                     requireContext(),

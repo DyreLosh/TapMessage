@@ -23,7 +23,6 @@ class SplashFragment : Fragment() {
     ): View? {
         binding = FragmentSplashBinding.inflate(inflater, container, false)
 
-
         return binding.root
     }
 

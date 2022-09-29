@@ -51,22 +51,57 @@
             app:destination="@id/chatFragment" />
     </fragment>
     <fragment
-        android:id="@+id/chatFragment"
-        android:name="ru.dyrelosh.tapmessage.presentation.ui.ChatFragment"
-        android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" />
-    <fragment
         android:id="@+id/fillProfileFragment"
         android:name="ru.dyrelosh.tapmessage.presentation.ui.FillProfileFragment"
         android:label="fragment_fill_profile"
         tools:layout="@layout/fragment_fill_profile" >
         <action
-            android:id="@+id/action_fillProfileFragment_to_chatFragment"
+            android:id="@+id/action_fillProfileFragment_to_registerResultFragment"
+            app:destination="@id/registerResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerResultFragment"
+        android:name="ru.dyrelosh.tapmessage.presentation.ui.RegisterResultFragment"
+        android:label="fragment_register_result"
+        tools:layout="@layout/fragment_register_result" >
+        <action
+            android:id="@+id/action_registerResultFragment_to_chatFragment"
             app:destination="@id/chatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="ru.dyrelosh.tapmessage.presentation.ui.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" >
+        <action
+            android:id="@+id/action_chatFragment_to_openChatFragment"
+            app:destination="@id/openChatFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_in_left" />
+        <action
+            android:id="@+id/action_chatFragment_to_newChatFragment"
+            app:destination="@id/newChatFragment" />
     </fragment>
     <fragment
         android:id="@+id/newChatFragment"
         android:name="ru.dyrelosh.tapmessage.presentation.ui.NewChatFragment"
         android:label="fragment_new_chat"
         tools:layout="@layout/fragment_new_chat" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="ru.dyrelosh.tapmessage.presentation.ui.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="ru.dyrelosh.tapmessage.presentation.ui.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/openChatFragment"
+        android:name="ru.dyrelosh.tapmessage.presentation.ui.OpenChatFragment"
+        android:label="fragment_open_chat"
+        tools:layout="@layout/fragment_open_chat" />
 </navigation>

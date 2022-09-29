@@ -69,11 +69,10 @@ class RegisterFragment : Fragment() {
 
     private fun signIn() {
         if (identicalPassword()) {
-            // identicalPassword() returns true only  when inputs are not empty and passwords are identical
             userEmail = etEmail.text.toString().trim()
             userPassword = etPassword.text.toString().trim()
 
-            /*create a user*/
+
             firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {

@@ -6,18 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import ru.dyrelosh.tapmessage.R
 import ru.dyrelosh.tapmessage.databinding.FragmentChatBinding
+import ru.dyrelosh.tapmessage.utils.AppStates
 import ru.dyrelosh.tapmessage.utils.FirebaseUtils
 
 class ChatFragment : Fragment() {
 
     lateinit var binding: FragmentChatBinding
-    lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,10 +21,18 @@ class ChatFragment : Fragment() {
     ): View? {
         binding = FragmentChatBinding.inflate(inflater, container, false)
         binding.emailveri.setOnClickListener {
+            AppStates.updateState(AppStates.OFFLINE)
             FirebaseUtils.firebaseAuth.signOut()
             findNavController().popBackStack()
+
+        }
+
+        binding.fabChat.setOnClickListener {
+            findNavController().navigate(R.id.action_chatFragment_to_openChatFragment)
         }
         return binding.root
     }
+
+
 
 }

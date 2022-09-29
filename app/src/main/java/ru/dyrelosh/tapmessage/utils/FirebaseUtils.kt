@@ -5,6 +5,8 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import ru.dyrelosh.tapmessage.models.User
 
 object FirebaseUtils {
@@ -13,6 +15,7 @@ object FirebaseUtils {
     val databaseRef: DatabaseReference = Firebase.database.reference
     var USER = User()
     val UID = firebaseAuth.currentUser?.uid.toString()
+    val storageRootRef: StorageReference = FirebaseStorage.getInstance().reference
 }
 
 const val NODE_USERS = "users"
@@ -22,6 +25,9 @@ const val CHILD_USERNAME = "username"
 const val CHILD_FULLNAME = "fullName"
 const val CHILD_PHONE = "phone"
 const val CHILD_STATE = "state"
+const val CHILD_PHOTO_URL = "photoUrl"
+
+const val FOLDER_PROFILE_IMAGE = "profile_image"
 
 
 

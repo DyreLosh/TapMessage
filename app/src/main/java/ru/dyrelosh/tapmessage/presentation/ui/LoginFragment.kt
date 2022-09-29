@@ -43,32 +43,13 @@ class LoginFragment : Fragment() {
             firebaseAuth.signInWithEmailAndPassword(signInEmail, signInPassword)
                 .addOnCompleteListener { signIn ->
                     if (signIn.isSuccessful) {
-
-                        val dateMap = mutableMapOf<String, Any>()
-                        val uid = firebaseAuth.currentUser?.uid.toString()
-                        val email = firebaseAuth.currentUser?.email.toString()
-                        dateMap[CHILD_ID] = uid
-                        dateMap[CHILD_EMAIL] = email
-                        dateMap[CHILD_USERNAME] = uid
-
-                        databaseRef.child(NODE_USERS).child(uid).updateChildren(dateMap)
-                            .addOnCompleteListener { task2 ->
-                                if (task2.isSuccessful) {
-                                    findNavController()
-                                        .navigate(R.id.action_loginFragment_to_chatFragment)
-                                    Toast.makeText(
-                                        requireContext(),
-                                        "signed in successfully",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                } else {
-                                    Toast.makeText(
-                                        requireContext(),
-                                        task2.exception?.message.toString(),
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
-                            }
+                        findNavController()
+                            .navigate(R.id.action_loginFragment_to_chatFragment)
+                        Toast.makeText(
+                            requireContext(),
+                            "signed in successfully",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     } else {
                         Toast.makeText(requireContext(), "sign in failed", Toast.LENGTH_SHORT)
                             .show()
