@@ -49,53 +49,16 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-            val url = CropImage.getActivityResult(data).uri
-            val path = FirebaseUtils.storageRootRef.child(FOLDER_PROFILE_IMAGE).child(UID)
-            path.putFile(url).addOnCompleteListener { task ->
-                if (task.isSuccessful) {
 
-                    path.downloadUrl.addOnCompleteListener {
-                        if (it.isSuccessful) {
-                            val photoUrl = it.result.toString()
-                            databaseRef.child(NODE_USERS).child(UID).child(CHILD_PHOTO_URL)
-                                .setValue(photoUrl).addOnCompleteListener {
-                                    if (it.isSuccessful) {
-                                        Toast.makeText(
-                                            this,
-                                            "Фотография успешно загружено",
-                                            Toast.LENGTH_SHORT
-                                        )
-                                            .show()
-                                        USER.photoUrl = photoUrl
-                                    }
-                                }
-                        }
-                    }
-                } else {
-                    Toast.makeText(
-                        this, task.exception?.message.toString(),
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-                }
-            }
-        }
+
+
+
+
+
+    override fun onStop() {
+        super.onStop()
+        AppStates.updateState(AppStates.OFFLINE)
     }
-
-
-//    override fun onStart() {
-//        super.onStart()
-//        AppStates.updateState(AppStates.ONLINE)
-//    }
-//
-//
-//    override fun onStop() {
-//        super.onStop()
-//        AppStates.updateState(AppStates.OFFLINE)
-//    }
 
     private fun initUser() {
         databaseRef.child(NODE_USERS).child(UID)

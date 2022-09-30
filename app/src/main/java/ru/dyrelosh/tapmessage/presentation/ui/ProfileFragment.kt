@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import ru.dyrelosh.tapmessage.R
 import ru.dyrelosh.tapmessage.databinding.FragmentProfileBinding
+import ru.dyrelosh.tapmessage.models.User
 
 class ProfileFragment : Fragment() {
 
@@ -17,6 +18,8 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
+
+        binding.profileFullNameText.text = User().fullName.toString()
 
         return binding.root
     }

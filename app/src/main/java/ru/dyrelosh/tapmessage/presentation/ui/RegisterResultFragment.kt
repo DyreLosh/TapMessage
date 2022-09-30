@@ -5,16 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import ru.dyrelosh.tapmessage.R
+import ru.dyrelosh.tapmessage.databinding.FragmentRegisterResultBinding
 
 class RegisterResultFragment : Fragment() {
+
+    lateinit var binding: FragmentRegisterResultBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register_result, container, false)
+        binding = FragmentRegisterResultBinding.inflate(inflater, container, false)
+        binding.resultToChatButton.setOnClickListener {
+            findNavController().navigate(R.id.action_registerResultFragment_to_chatFragment)
+        }
+        return binding.root
     }
 
 }

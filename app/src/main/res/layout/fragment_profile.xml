@@ -6,19 +6,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.ui.ProfileFragment">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/materialToolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cocomat_regular"
+            android:text="Профиль"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:textSize="20sp"/>
+    </androidx.appcompat.widget.Toolbar>
+
+
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/materialToolbar2">
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="150dp"
             android:layout_height="150dp"
             app:cardCornerRadius="100dp">
+
             <ImageView
+                android:id="@+id/profileImage"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:background="@drawable/circle_image"

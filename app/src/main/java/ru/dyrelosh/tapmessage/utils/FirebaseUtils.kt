@@ -1,5 +1,9 @@
 package ru.dyrelosh.tapmessage.utils
 
+import android.content.Context
+import android.net.Uri
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
@@ -8,6 +12,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import ru.dyrelosh.tapmessage.models.User
+import ru.dyrelosh.tapmessage.utils.FirebaseUtils.UID
 
 object FirebaseUtils {
     val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -16,6 +21,8 @@ object FirebaseUtils {
     var USER = User()
     val UID = firebaseAuth.currentUser?.uid.toString()
     val storageRootRef: StorageReference = FirebaseStorage.getInstance().reference
+
+
 }
 
 const val NODE_USERS = "users"
