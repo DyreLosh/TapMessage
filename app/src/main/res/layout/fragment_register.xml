@@ -40,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/emailTextInputLogin"
+            android:id="@+id/emailTextInputRegister"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
             app:startIconDrawable="@drawable/ic_email">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/emailTextEditLogin"
+                android:id="@+id/emailTextEditRegister"
                 android:layout_width="match_parent"
                 android:maxLines="1"
                 android:singleLine="true"
@@ -67,7 +67,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/passwordTextInputLogin"
+            android:id="@+id/passwordTextInputRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
@@ -83,11 +83,11 @@
             app:boxCornerRadiusTopStart="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emailTextInputLogin"
+            app:layout_constraintTop_toBottomOf="@+id/emailTextInputRegister"
             app:startIconDrawable="@drawable/ic_lock_2">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/passwordTextEditLogin"
+                android:id="@+id/passwordTextEditRegister"
                 android:layout_width="match_parent"
                 android:maxLines="1"
                 android:singleLine="true"
@@ -109,7 +109,7 @@
             app:boxCornerRadiusBottomEnd="20dp"
             app:boxCornerRadiusBottomStart="20dp"
             app:boxCornerRadiusTopEnd="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/passwordTextInputLogin"
+            app:layout_constraintTop_toBottomOf="@+id/passwordTextInputRegister"
             app:boxCornerRadiusTopStart="20dp"
             app:startIconDrawable="@drawable/ic_lock_2">
 
@@ -123,7 +123,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/signInWithPasswordButton"
+            android:id="@+id/signUpWithPasswordButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"

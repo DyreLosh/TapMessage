@@ -37,9 +37,9 @@ class LoginMethodFragment : Fragment() {
         binding = FragmentLoginMethodBinding.inflate(inflater, container, false)
 
         binding.signInWithGoogleInLoginMethod.setOnClickListener {
-            signInWithGoogle()
+            //signInWithGoogle()
         }
-        binding.signInWithPasswordButton.setOnClickListener {
+        binding.signInWithPasswordMethodButton.setOnClickListener {
             findNavController().navigate(R.id.action_loginMethodFragment_to_loginFragment)
         }
         binding.signUpButtonLoginMethod.setOnClickListener {

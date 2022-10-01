@@ -12,4 +12,10 @@
     <string name="google_text">Google</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="confirm_password">Confirm password</string>
+    <string name="error_empty">Field is empty</string>
+    <string name="error_username_more4">Must be more than 4 characters</string>
+    <string name="error_email_more8">Must be more than 8 characters</string>
+    <string name="error_email_true">Invalid mail</string>
+    <string name="error_confirm">Passwords don\'t match</string>
+    <string name="error_phone_more">There must be 11 characters</string>
 </resources>

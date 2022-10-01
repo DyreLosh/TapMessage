@@ -1,7 +1,7 @@
 package ru.dyrelosh.tapmessage.models
 
 data class User(
-    val id: String = "",
+    var id: String = "",
     var username: String = "",
     var fullName: String = "",
     var phone: String = "",

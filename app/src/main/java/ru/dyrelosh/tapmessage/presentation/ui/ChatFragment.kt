@@ -37,5 +37,9 @@ class ChatFragment : Fragment() {
         return binding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        AppStates.updateState(AppStates.ONLINE, requireContext())
+    }
 
 }

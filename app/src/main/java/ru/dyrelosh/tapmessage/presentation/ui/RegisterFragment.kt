@@ -9,93 +9,79 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseUser
+import ru.dyrelosh.tapmessage.PreferenceManager
 import ru.dyrelosh.tapmessage.R
+import ru.dyrelosh.tapmessage.Validator
 import ru.dyrelosh.tapmessage.utils.FirebaseUtils.firebaseAuth
 import ru.dyrelosh.tapmessage.databinding.FragmentRegisterBinding
+import ru.dyrelosh.tapmessage.models.User
+import ru.dyrelosh.tapmessage.utils.CHILD_EMAIL
+import ru.dyrelosh.tapmessage.utils.CHILD_ID
+import ru.dyrelosh.tapmessage.utils.FirebaseUtils
+import ru.dyrelosh.tapmessage.utils.FirebaseUtils.UID
 import ru.dyrelosh.tapmessage.utils.FirebaseUtils.firebaseUser
+import ru.dyrelosh.tapmessage.utils.NODE_USERS
 
 class RegisterFragment : Fragment() {
 
     lateinit var binding: FragmentRegisterBinding
-    lateinit var etEmail: EditText
-    lateinit var etPassword: EditText
-    lateinit var etConfirmPassword: EditText
-    lateinit var userEmail: String
-    lateinit var userPassword: String
-    lateinit var createAccountInputsArray: Array<EditText>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentRegisterBinding.inflate(inflater, container, false)
-        binding.signInWithPasswordButton.setOnClickListener {
-            signIn()
+        binding.signUpWithPasswordButton.setOnClickListener {
+            validateRegister()
         }
-        etEmail = binding.emailTextEditLogin
-        etPassword = binding.passwordTextEditLogin
-        etConfirmPassword = binding.confirmPasswordInputText
-
-
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
+    private fun validateRegister() {
+        val emailInputLayout = binding.emailTextInputRegister
+        val passwordInputLayout = binding.passwordTextInputRegister
+        val confirmPasswordInputLayout = binding.confirmPasswordInputLayout
+        val validator = Validator(requireContext())
 
-    }
+        emailInputLayout.error = validator.validateEmail(binding.emailTextEditRegister)
+        passwordInputLayout.error = validator.validatePassword(binding.passwordTextEditRegister)
+        confirmPasswordInputLayout.error = validator.confirmPassword(
+            binding.passwordTextEditRegister,
+            binding.confirmPasswordInputText
+        )
 
-    private fun notEmpty(): Boolean = etEmail.text.toString().trim().isNotEmpty() &&
-            etPassword.text.toString().trim().isNotEmpty() &&
-            etConfirmPassword.text.toString().trim().isNotEmpty()
-
-    private fun identicalPassword(): Boolean {
-        var identical = false
-        if (notEmpty() &&
-            etPassword.text.toString().trim() == etConfirmPassword.text.toString().trim()
+        if (emailInputLayout.error == null
+            && passwordInputLayout.error == null
+            && confirmPasswordInputLayout.error == null
         ) {
-            identical = true
-        } else if (!notEmpty()) {
-            createAccountInputsArray.forEach { input ->
-                if (input.text.toString().trim().isEmpty()) {
-                    input.error = "${input.hint} is required"
-                }
-            }
-        } else {
-            Toast.makeText(requireContext(), "password not matching", Toast.LENGTH_SHORT).show()
+            signIn()
         }
-        return identical
     }
 
     private fun signIn() {
-        if (identicalPassword()) {
-            userEmail = etEmail.text.toString().trim()
-            userPassword = etPassword.text.toString().trim()
-
-
-            firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(requireContext(), "created account successfully !", Toast.LENGTH_SHORT).show()
-                        findNavController().navigate(R.id.action_registerFragment_to_fillProfileFragment)
-                        sendEmailVerification()
-
-                    } else {
-                        Toast.makeText(requireContext(), "failed to Authenticate !", Toast.LENGTH_SHORT).show()
-                    }
-                }
+        firebaseAuth.createUserWithEmailAndPassword(
+            binding.emailTextEditRegister.text.toString(),
+            binding.passwordTextEditRegister.text.toString()
+        ).addOnCompleteListener {
+            if (it.isSuccessful) {
+                sendEmailVerification()
+                PreferenceManager(requireContext()).writeUserId(it.result.user?.uid.toString())
+                findNavController().navigate(R.id.action_registerFragment_to_fillProfileFragment)
+            }
+        }.addOnFailureListener {
+            Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
         }
     }
-
-    /* send verification email to the new user. This will only
-    *  work if the firebase user is not null.
-    */
 
     private fun sendEmailVerification() {
         firebaseUser?.let {
             it.sendEmailVerification().addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(requireContext(), "email sent to $userEmail", Toast.LENGTH_SHORT)
+                    Toast.makeText(
+                        requireContext(),
+                        "Email sent to ${firebaseAuth.currentUser?.email.toString()}",
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
                 }
             }

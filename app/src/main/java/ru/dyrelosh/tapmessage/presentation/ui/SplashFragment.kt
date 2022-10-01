@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseUser
+import ru.dyrelosh.tapmessage.PreferenceManager
 import ru.dyrelosh.tapmessage.R
 import ru.dyrelosh.tapmessage.databinding.FragmentSplashBinding
 import ru.dyrelosh.tapmessage.utils.FirebaseUtils
@@ -22,7 +23,11 @@ class SplashFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSplashBinding.inflate(inflater, container, false)
-
+        Toast.makeText(
+            requireContext(),
+            PreferenceManager(requireContext()).readUserId(),
+            Toast.LENGTH_SHORT
+        ).show()
         return binding.root
     }
 

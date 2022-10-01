@@ -11,6 +11,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import ru.dyrelosh.tapmessage.PreferenceManager
 import ru.dyrelosh.tapmessage.models.User
 import ru.dyrelosh.tapmessage.utils.FirebaseUtils.UID
 
@@ -21,7 +22,6 @@ object FirebaseUtils {
     var USER = User()
     val UID = firebaseAuth.currentUser?.uid.toString()
     val storageRootRef: StorageReference = FirebaseStorage.getInstance().reference
-
 
 }
 

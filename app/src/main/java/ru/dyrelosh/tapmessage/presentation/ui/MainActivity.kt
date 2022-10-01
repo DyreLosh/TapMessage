@@ -49,15 +49,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
-
-
-
-
-
     override fun onStop() {
         super.onStop()
-        AppStates.updateState(AppStates.OFFLINE)
+        AppStates.updateState(AppStates.OFFLINE, this)
     }
 
     private fun initUser() {

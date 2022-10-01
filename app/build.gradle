@@ -62,5 +62,6 @@ dependencies {
     implementation 'com.github.ibrahimsn98:SmoothBottomBar:1.7.9'
     implementation 'com.github.bumptech.glide:glide:4.13.2'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.github.geniusforapp:fancyDialog:1.0.2'
 
 }
