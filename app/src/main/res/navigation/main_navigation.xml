@@ -110,4 +110,9 @@
         android:name="ru.dyrelosh.tapmessage.presentation.ui.OpenChatFragment"
         android:label="fragment_open_chat"
         tools:layout="@layout/fragment_open_chat" />
+    <fragment
+        android:id="@+id/contactsFragment"
+        android:name="ru.dyrelosh.tapmessage.presentation.ui.ContactsFragment"
+        android:label="fragment_contacts"
+        tools:layout="@layout/fragment_contacts" />
 </navigation>

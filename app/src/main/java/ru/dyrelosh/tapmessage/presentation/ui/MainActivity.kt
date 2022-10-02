@@ -13,6 +13,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.theartofdev.edmodo.cropper.CropImage
+import kotlinx.coroutines.CoroutineScope
 import ru.dyrelosh.tapmessage.R
 import ru.dyrelosh.tapmessage.databinding.ActivityMainBinding
 import ru.dyrelosh.tapmessage.models.User
@@ -20,6 +21,7 @@ import ru.dyrelosh.tapmessage.utils.*
 import ru.dyrelosh.tapmessage.utils.FirebaseUtils.UID
 import ru.dyrelosh.tapmessage.utils.FirebaseUtils.USER
 import ru.dyrelosh.tapmessage.utils.FirebaseUtils.databaseRef
+import kotlin.coroutines.CoroutineContext
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -27,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        APP_ACTIVITY = this
 
         initUser()
         val navHostFragment =
@@ -40,7 +43,11 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setupWithNavController(menu, navController)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.chatFragment || destination.id == R.id.profileFragment || destination.id == R.id.settingsFragment) {
+            if (destination.id == R.id.chatFragment
+                || destination.id == R.id.profileFragment
+                || destination.id == R.id.settingsFragment
+                || destination.id == R.id.contactsFragment
+            ) {
                 bottomBar.visibility = View.VISIBLE
             } else {
                 bottomBar.visibility = View.GONE

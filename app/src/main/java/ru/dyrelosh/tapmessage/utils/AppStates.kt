@@ -1,9 +1,6 @@
 package ru.dyrelosh.tapmessage.utils
 
 import android.content.Context
-import android.widget.Toast
-import ru.dyrelosh.tapmessage.PreferenceManager
-import ru.dyrelosh.tapmessage.utils.FirebaseUtils.UID
 import ru.dyrelosh.tapmessage.utils.FirebaseUtils.databaseRef
 
 enum class AppStates(val state: String) {

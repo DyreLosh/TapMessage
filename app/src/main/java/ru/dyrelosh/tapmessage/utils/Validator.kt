@@ -1,7 +1,8 @@
-package ru.dyrelosh.tapmessage
+package ru.dyrelosh.tapmessage.utils
 
 import android.content.Context
 import android.widget.EditText
+import ru.dyrelosh.tapmessage.R
 
 class Validator(private val context: Context) {
     companion object {

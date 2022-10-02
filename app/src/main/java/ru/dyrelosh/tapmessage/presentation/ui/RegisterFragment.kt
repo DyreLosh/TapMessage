@@ -5,22 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseUser
-import ru.dyrelosh.tapmessage.PreferenceManager
+import ru.dyrelosh.tapmessage.utils.PreferenceManager
 import ru.dyrelosh.tapmessage.R
-import ru.dyrelosh.tapmessage.Validator
+import ru.dyrelosh.tapmessage.utils.Validator
 import ru.dyrelosh.tapmessage.utils.FirebaseUtils.firebaseAuth
 import ru.dyrelosh.tapmessage.databinding.FragmentRegisterBinding
-import ru.dyrelosh.tapmessage.models.User
-import ru.dyrelosh.tapmessage.utils.CHILD_EMAIL
-import ru.dyrelosh.tapmessage.utils.CHILD_ID
-import ru.dyrelosh.tapmessage.utils.FirebaseUtils
-import ru.dyrelosh.tapmessage.utils.FirebaseUtils.UID
 import ru.dyrelosh.tapmessage.utils.FirebaseUtils.firebaseUser
-import ru.dyrelosh.tapmessage.utils.NODE_USERS
 
 class RegisterFragment : Fragment() {
 

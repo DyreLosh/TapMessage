@@ -1,7 +1,6 @@
-package ru.dyrelosh.tapmessage
+package ru.dyrelosh.tapmessage.utils
 
 import android.content.Context
-import ru.dyrelosh.tapmessage.utils.FirebaseUtils
 
 class PreferenceManager(private val context: Context) {
 

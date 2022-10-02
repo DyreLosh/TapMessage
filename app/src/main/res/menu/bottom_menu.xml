@@ -6,6 +6,10 @@
         android:title="Chats"
         android:icon="@drawable/ic_chat"/>
     <item
+        android:id="@+id/contactsFragment"
+        android:title="Contacts"
+        android:icon="@drawable/ic_people"/>
+    <item
         android:id="@+id/profileFragment"
         android:title="Profile"
         android:icon="@drawable/ic_person"/>

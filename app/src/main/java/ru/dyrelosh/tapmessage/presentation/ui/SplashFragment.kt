@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseUser
-import ru.dyrelosh.tapmessage.PreferenceManager
+import ru.dyrelosh.tapmessage.utils.PreferenceManager
 import ru.dyrelosh.tapmessage.R
 import ru.dyrelosh.tapmessage.databinding.FragmentSplashBinding
 import ru.dyrelosh.tapmessage.utils.FirebaseUtils

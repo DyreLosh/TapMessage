@@ -14,11 +14,10 @@ import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
-import ru.dyrelosh.tapmessage.PreferenceManager
+import ru.dyrelosh.tapmessage.utils.PreferenceManager
 import ru.dyrelosh.tapmessage.R
-import ru.dyrelosh.tapmessage.Validator
+import ru.dyrelosh.tapmessage.utils.Validator
 import ru.dyrelosh.tapmessage.databinding.FragmentFillProfileBinding
-import ru.dyrelosh.tapmessage.models.User
 import ru.dyrelosh.tapmessage.utils.*
 import ru.dyrelosh.tapmessage.utils.FirebaseUtils.databaseRef
 import ru.dyrelosh.tapmessage.utils.FirebaseUtils.firebaseAuth
@@ -28,6 +27,7 @@ class FillProfileFragment : Fragment() {
 
     lateinit var binding: FragmentFillProfileBinding
     lateinit var preferenceManager: PreferenceManager
+    lateinit var photoUrl: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -133,29 +133,48 @@ class FillProfileFragment : Fragment() {
 
     private fun sendUserInformation() {
 
-        databaseRef.child(NODE_USERS).child(preferenceManager.readUserId()).child(CHILD_FULLNAME)
-            .setValue(binding.fullNameFillEditText.text.toString()).addOnFailureListener {
-                Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
-            }
+        val dateMap = mutableMapOf<String, Any>()
+        dateMap[CHILD_ID] = preferenceManager.readUserId()
+        dateMap[CHILD_EMAIL] = firebaseAuth.currentUser?.email.toString()
+        dateMap[CHILD_PHONE] = binding.phoneFillEditText.text.toString()
+        dateMap[CHILD_FULLNAME] = binding.fullNameFillEditText.text.toString()
+        dateMap[CHILD_USERNAME] = binding.nicknameFillEditText.text.toString()
+        dateMap[CHILD_PHOTO_URL] = FirebaseUtils.USER.photoUrl
 
-        databaseRef.child(NODE_USERS).child(preferenceManager.readUserId()).child(CHILD_PHONE)
-            .setValue(binding.phoneFillEditText.text.toString()).addOnFailureListener {
-                Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
-            }
-
-        databaseRef.child(NODE_USERS).child(preferenceManager.readUserId()).child(CHILD_USERNAME)
-            .setValue(binding.nicknameFillEditText.text.toString()).addOnFailureListener {
-                Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
-            }
-        databaseRef.child(NODE_USERS).child(preferenceManager.readUserId()).child(CHILD_ID)
-            .setValue(preferenceManager.readUserId()).addOnFailureListener {
-                Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
-            }
-        databaseRef.child(NODE_USERS).child(preferenceManager.readUserId()).child(CHILD_EMAIL)
-            .setValue(firebaseAuth.currentUser?.email.toString()).addOnFailureListener {
-                Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
-            }.addOnCompleteListener {
+        databaseRef.child(NODE_USERS).child(preferenceManager.readUserId()).setValue(dateMap)
+            .addOnSuccessListener {
                 findNavController().navigate(R.id.action_fillProfileFragment_to_registerResultFragment)
             }
+            .addOnFailureListener {
+                Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+            }
+
+//        databaseRef.child(NODE_USERS).child(preferenceManager.readUserId()).child(CHILD_FULLNAME)
+//            .setValue(binding.fullNameFillEditText.text.toString()).addOnFailureListener {
+//                Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
+//            }
+//
+//        databaseRef.child(NODE_USERS).child(preferenceManager.readUserId()).child(CHILD_PHONE)
+//            .setValue(binding.phoneFillEditText.text.toString()).addOnFailureListener {
+//                Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
+//            }
+//
+//        databaseRef.child(NODE_USERS).child(preferenceManager.readUserId()).child(CHILD_USERNAME)
+//            .setValue(binding.nicknameFillEditText.text.toString()).addOnFailureListener {
+//                Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
+//            }
+//        databaseRef.child(NODE_USERS).child(preferenceManager.readUserId()).child(CHILD_ID)
+//            .setValue(preferenceManager.readUserId()).addOnFailureListener {
+//                Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
+//            }
+//        databaseRef.child(NODE_USERS).child(preferenceManager.readUserId()).child(CHILD_EMAIL)
+//            .setValue(firebaseAuth.currentUser?.email.toString()).addOnFailureListener {
+//                Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
+//            }.addOnCompleteListener {
+//                findNavController().navigate(R.id.action_fillProfileFragment_to_registerResultFragment)
+//            }
+
+        databaseRef.child(NODE_PHONES).child(binding.phoneFillEditText.text.toString())
+            .setValue(preferenceManager.readUserId())
     }
 }
