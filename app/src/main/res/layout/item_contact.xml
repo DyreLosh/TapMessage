@@ -8,9 +8,9 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/contactItemPhoto"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        tools:src="@drawable/profile_blank"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/profile_blank"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="20dp"
@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/contactItemName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -38,6 +38,7 @@
 
 
         <TextView
+            android:id="@+id/contactItemState"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

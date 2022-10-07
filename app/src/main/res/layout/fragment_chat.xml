@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blue"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.ui.ChatFragment">
 
@@ -32,6 +33,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:paddingTop="5dp"
+        android:background="@drawable/main_chat_corner"
         app:layout_constraintTop_toBottomOf="@+id/materialToolbar4"
         tools:listitem="@layout/item_chat" />
 

@@ -5,9 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import ru.dyrelosh.tapmessage.R
 import ru.dyrelosh.tapmessage.databinding.FragmentProfileBinding
 import ru.dyrelosh.tapmessage.models.User
+import ru.dyrelosh.tapmessage.utils.FirebaseUtils
+import ru.dyrelosh.tapmessage.utils.NODE_USERS
 
 class ProfileFragment : Fragment() {
 
@@ -19,7 +25,21 @@ class ProfileFragment : Fragment() {
     ): View? {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        binding.profileFullNameText.text = User().fullName.toString()
+        FirebaseUtils.databaseRef.child(NODE_USERS).child(FirebaseUtils.userUid)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val profileInfo = snapshot.getValue(User::class.java) ?: User()
+                    binding.profileFullNameText.text = profileInfo.fullName
+                    Glide.with(binding.root)
+                        .load(profileInfo.photoUrl)
+                        .into(binding.profileImage)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
 
         return binding.root
     }

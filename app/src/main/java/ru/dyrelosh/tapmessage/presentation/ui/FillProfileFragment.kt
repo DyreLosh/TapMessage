@@ -176,5 +176,7 @@ class FillProfileFragment : Fragment() {
 
         databaseRef.child(NODE_PHONES).child(binding.phoneFillEditText.text.toString())
             .setValue(preferenceManager.readUserId())
+        databaseRef.child(NODE_USERNAMES).child(binding.nicknameFillEditText.text.toString())
+            .setValue(preferenceManager.readUserId())
     }
 }

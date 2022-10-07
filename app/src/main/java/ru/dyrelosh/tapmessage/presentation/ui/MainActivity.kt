@@ -1,19 +1,18 @@
 package ru.dyrelosh.tapmessage.presentation.ui
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.PopupMenu
-import android.widget.Toast
-import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.theartofdev.edmodo.cropper.CropImage
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
+import okhttp3.Dispatcher
 import ru.dyrelosh.tapmessage.R
 import ru.dyrelosh.tapmessage.databinding.ActivityMainBinding
 import ru.dyrelosh.tapmessage.models.User
@@ -21,7 +20,6 @@ import ru.dyrelosh.tapmessage.utils.*
 import ru.dyrelosh.tapmessage.utils.FirebaseUtils.UID
 import ru.dyrelosh.tapmessage.utils.FirebaseUtils.USER
 import ru.dyrelosh.tapmessage.utils.FirebaseUtils.databaseRef
-import kotlin.coroutines.CoroutineContext
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -53,6 +51,11 @@ class MainActivity : AppCompatActivity() {
                 bottomBar.visibility = View.GONE
             }
         }
+
+        CoroutineScope(IO).launch {
+            initContacts()
+        }
+
 
     }
 
