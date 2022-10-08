@@ -63,6 +63,7 @@
                 android:layout_width="match_parent"
                 android:maxLines="1"
                 android:singleLine="true"
+                android:inputType="textEmailAddress"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,6 +81,8 @@
             app:boxCornerRadiusBottomEnd="20dp"
             app:boxCornerRadiusBottomStart="20dp"
             app:boxCornerRadiusTopEnd="20dp"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/black"
             app:boxCornerRadiusTopStart="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -91,6 +94,7 @@
                 android:layout_width="match_parent"
                 android:maxLines="1"
                 android:singleLine="true"
+                android:inputType="textPassword"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>

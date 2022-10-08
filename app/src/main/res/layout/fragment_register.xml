@@ -63,6 +63,7 @@
                 android:layout_width="match_parent"
                 android:maxLines="1"
                 android:singleLine="true"
+                android:inputType="textEmailAddress"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -77,9 +78,11 @@
             app:startIconTint="@color/black"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:hint="@string/password_hint"
+            app:passwordToggleEnabled="true"
             app:boxCornerRadiusBottomEnd="20dp"
             app:boxCornerRadiusBottomStart="20dp"
             app:boxCornerRadiusTopEnd="20dp"
+            app:passwordToggleTint="@color/black"
             app:boxCornerRadiusTopStart="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -90,6 +93,7 @@
                 android:id="@+id/passwordTextEditRegister"
                 android:layout_width="match_parent"
                 android:maxLines="1"
+                android:inputType="textPassword"
                 android:singleLine="true"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white" />
@@ -104,6 +108,8 @@
             app:boxStrokeColor="@color/black"
             android:textColorHint="@color/black"
             app:startIconTint="@color/black"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/black"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:hint="@string/confirm_password"
             app:boxCornerRadiusBottomEnd="20dp"
@@ -118,6 +124,7 @@
                 android:layout_width="match_parent"
                 android:maxLines="1"
                 android:singleLine="true"
+                android:inputType="textPassword"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>

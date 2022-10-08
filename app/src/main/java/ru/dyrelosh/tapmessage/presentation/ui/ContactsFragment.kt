@@ -32,6 +32,8 @@ class ContactsFragment : Fragment() {
     private lateinit var mAdapter: FirebaseRecyclerAdapter<Common, ContactHolder>
     private lateinit var mRefContacts: DatabaseReference
     private lateinit var mRefUsers: DatabaseReference
+    private lateinit var mRefUserListener: ValueEventListener
+    private var mapListener = hashMapOf<DatabaseReference, ValueEventListener>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,7 +67,7 @@ class ContactsFragment : Fragment() {
 
             override fun onBindViewHolder(holder: ContactHolder, position: Int, model: Common) {
                 mRefUsers = FirebaseUtils.databaseRef.child(NODE_USERS).child(model.id)
-                mRefUsers.addValueEventListener(object: ValueEventListener{
+                mRefUserListener = object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         val contact = snapshot.getCommonModel()
                         holder.name.text = contact.fullName
@@ -78,10 +80,9 @@ class ContactsFragment : Fragment() {
                     override fun onCancelled(error: DatabaseError) {
                         TODO("Not yet implemented")
                     }
-
-                })
-
-
+                }
+                mRefUsers.addValueEventListener(mRefUserListener)
+                mapListener[mRefUsers] = mRefUserListener
             }
 
         }
@@ -100,6 +101,9 @@ class ContactsFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         mAdapter.stopListening()
+        mapListener.forEach{
+            it.key.removeEventListener(it.value)
+        }
     }
 
 }
