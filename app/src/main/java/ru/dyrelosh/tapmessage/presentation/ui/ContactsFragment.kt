@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.firebase.ui.database.FirebaseRecyclerAdapter
@@ -75,7 +77,15 @@ class ContactsFragment : Fragment() {
                         Glide.with(binding.root)
                             .load(contact.photoUrl)
                             .into(holder.photo)
+                        val bundle = bundleOf("common" to contact)
+                        holder.itemView.setOnClickListener {
+                            findNavController().navigate(
+                                R.id.action_contactsFragment_to_openChatFragment,
+                                bundle
+                            )
+                        }
                     }
+
 
                     override fun onCancelled(error: DatabaseError) {
                         TODO("Not yet implemented")
@@ -101,7 +111,7 @@ class ContactsFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         mAdapter.stopListening()
-        mapListener.forEach{
+        mapListener.forEach {
             it.key.removeEventListener(it.value)
         }
     }

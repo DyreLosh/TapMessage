@@ -9,5 +9,4 @@ data class Common(
     var state: String = "",
     var bio: String = "",
     var photoUrl: String = ""
-
-)
+) : java.io.Serializable

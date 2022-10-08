@@ -109,10 +109,18 @@
         android:id="@+id/openChatFragment"
         android:name="ru.dyrelosh.tapmessage.presentation.ui.OpenChatFragment"
         android:label="fragment_open_chat"
-        tools:layout="@layout/fragment_open_chat" />
+        tools:layout="@layout/fragment_open_chat" >
+        <argument
+            android:name="common"
+            app:argType="ru.dyrelosh.tapmessage.models.Common" />
+    </fragment>
     <fragment
         android:id="@+id/contactsFragment"
         android:name="ru.dyrelosh.tapmessage.presentation.ui.ContactsFragment"
         android:label="fragment_contacts"
-        tools:layout="@layout/fragment_contacts" />
+        tools:layout="@layout/fragment_contacts" >
+        <action
+            android:id="@+id/action_contactsFragment_to_openChatFragment"
+            app:destination="@id/openChatFragment" />
+    </fragment>
 </navigation>

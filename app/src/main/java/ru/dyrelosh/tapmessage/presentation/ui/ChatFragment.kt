@@ -30,7 +30,6 @@ class ChatFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentChatBinding.inflate(inflater, container, false)
-        binding.materialToolbar4.title = User().username.toString()
         binding.fabChat.setOnClickListener {
             findNavController().navigate(R.id.action_chatFragment_to_openChatFragment)
         }

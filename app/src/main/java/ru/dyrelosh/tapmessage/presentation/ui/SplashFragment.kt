@@ -36,8 +36,7 @@ class SplashFragment : Fragment() {
         Handler(Looper.getMainLooper()).postDelayed({
             val user: FirebaseUser? = FirebaseUtils.firebaseAuth.currentUser
             if (user != null) {
-                user?.let {
-                    Toast.makeText(requireContext(), user.email.toString(), Toast.LENGTH_SHORT).show()
+                user.let {
                     findNavController().navigate(R.id.action_splashFragment_to_chatFragment)
                 }
             }
