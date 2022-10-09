@@ -15,4 +15,11 @@ data class Common(
     var type: String = "",
     var from: String = "",
     var timeStamp: Any = ""
-) : java.io.Serializable
+
+
+
+) : java.io.Serializable {
+    override fun equals(other: Any?): Boolean {
+        return (other as Common).id == id
+    }
+}

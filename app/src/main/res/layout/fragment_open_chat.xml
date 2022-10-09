@@ -8,18 +8,26 @@
     tools:context=".presentation.ui.OpenChatFragment">
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/openChatRecyclerView"
-        android:layout_width="match_parent"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/chatSwipeRefresh"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/chat_layout_corner"
-        tools:listitem="@layout/item_message"
-        android:overScrollMode="never"
-        android:clipToPadding="false"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintTop_toBottomOf="@+id/materialToolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/materialToolbar">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/openChatRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/chat_layout_corner"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/materialToolbar"
+            tools:listitem="@layout/item_message" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/materialToolbar"

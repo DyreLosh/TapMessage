@@ -10,11 +10,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsListView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
+import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -41,8 +45,12 @@ class OpenChatFragment : Fragment() {
     private lateinit var mRefMessages: DatabaseReference
     private lateinit var mAdapter: ChatAdapter
     private lateinit var mRecyclerView: RecyclerView
-    private lateinit var mMessagesListener: ValueEventListener
-    private var mListMessages = emptyList<Common>()
+    private lateinit var mMessagesListener: ChildEventListener
+    private var mCountMessages = 15
+    private var nIsScrolling = false
+    private var nSmoothScrollToPosition = true
+    private lateinit var mSwipeRefresh: SwipeRefreshLayout
+    private lateinit var mLayoutManager: LinearLayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,7 +69,9 @@ class OpenChatFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-       // initFields()
+        mSwipeRefresh = binding.chatSwipeRefresh
+        mLayoutManager = LinearLayoutManager(this.context)
+        // initFields()
         initToolbar()
         initRecyclerView()
     }
@@ -87,36 +97,60 @@ class OpenChatFragment : Fragment() {
             .child(FirebaseUtils.userUid)
             .child(bundleArgs.common.id)
         mRecyclerView.adapter = mAdapter
-        mMessagesListener = object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                mListMessages = snapshot.children.map { it.getCommonModel() }
-                mAdapter.submitList(mListMessages)
-                mRecyclerView.smoothScrollToPosition(mAdapter.itemCount)
-            }
+        mRecyclerView.setHasFixedSize(true)
+        mRecyclerView.isNestedScrollingEnabled = false
+        mRecyclerView.layoutManager = mLayoutManager
+        mMessagesListener = AppChildEventListener {
+            val message = it.getCommonModel()
+            if (nSmoothScrollToPosition) {
+                mAdapter.addItemToBottom(message) {
+                    mRecyclerView.smoothScrollToPosition(mAdapter.itemCount)
+                }
 
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+            } else {
+                mAdapter.addItemToTop(message) {
+                    mSwipeRefresh.isRefreshing = false
+                }
             }
 
         }
-        mRefMessages.addValueEventListener(mMessagesListener)
+        mRefMessages.limitToLast(mCountMessages).addChildEventListener(mMessagesListener)
+        mRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (nIsScrolling && dy < 0 && mLayoutManager.findFirstVisibleItemPosition() <= 3) {
+                    updateData()
+                }
+            }
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                    nIsScrolling = true
+                }
+            }
+        })
+        mSwipeRefresh.setOnRefreshListener { updateData() }
+    }
+
+    private fun updateData() {
+        nSmoothScrollToPosition = false
+        nIsScrolling = false
+        mCountMessages += 10
+        mRefMessages.removeEventListener(mMessagesListener)
+        mRefMessages.limitToLast(mCountMessages).addChildEventListener(mMessagesListener)
 
     }
 
     private fun initToolbar() {
-        mListenerInfoToolbar = object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                mReceivingUser = snapshot.getUserModel()
-                initInfoToolbar()
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
+        mListenerInfoToolbar = AppValueEventListener {
+            mReceivingUser = it.getUserModel()
+            initInfoToolbar()
         }
         mRefUser = FirebaseUtils.databaseRef.child(NODE_USERS).child(bundleArgs.common.id)
         mRefUser.addValueEventListener(mListenerInfoToolbar)
         binding.sendMessageButton.setOnClickListener {
+            nSmoothScrollToPosition = true
             val message = binding.sendMessageEditText.text.toString()
             if (message.isEmpty()) {
                 Toast.makeText(requireContext(), "sd", Toast.LENGTH_SHORT).show()
@@ -141,6 +175,7 @@ class OpenChatFragment : Fragment() {
         mapMessage[CHILD_FROM] = FirebaseUtils.userUid
         mapMessage[CHILD_TYPE] = typeText
         mapMessage[CHILD_TEXT] = message
+        mapMessage[CHILD_ID] = messageKey.toString()
         mapMessage[CHILD_TIMESTAMP] = ServerValue.TIMESTAMP
 
         val mapDialog = hashMapOf<String, Any>()
@@ -166,19 +201,6 @@ class OpenChatFragment : Fragment() {
         binding.openChatState.text = mReceivingUser.state
     }
 
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        bundleArgs.common.let { arg ->
-//            arg.photoUrl.let {
-//                Glide.with(this)
-//                    .load(arg.photoUrl)
-//                    .load(binding.openChatImage)
-//            }
-//            binding.openChatName.text = arg.fullName
-//            binding.openChatState.text = arg.state
-//        }
-//    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE
@@ -186,7 +208,8 @@ class OpenChatFragment : Fragment() {
         ) {
             val url = CropImage.getActivityResult(data).uri
             val path =
-                FirebaseUtils.storageRootRef.child(FOLDER_PROFILE_IMAGE).child(FirebaseUtils.userUid)
+                FirebaseUtils.storageRootRef.child(FOLDER_PROFILE_IMAGE)
+                    .child(FirebaseUtils.userUid)
             putImageToStorage(url, path) {
                 getUrlFromStorage(path) {
                     putUrlToDatabase(it) {

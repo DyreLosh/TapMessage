@@ -3,9 +3,11 @@ package ru.dyrelosh.tapmessage.presentation.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ru.dyrelosh.tapmessage.databinding.ItemMessageBinding
 import ru.dyrelosh.tapmessage.models.Common
+import ru.dyrelosh.tapmessage.utils.DiffUtilCallback
 import ru.dyrelosh.tapmessage.utils.FirebaseUtils
 import ru.dyrelosh.tapmessage.utils.asTime
 import java.text.SimpleDateFormat
@@ -43,10 +45,20 @@ class ChatAdapter : RecyclerView.Adapter<ChatViewHolder>() {
 
     override fun getItemCount(): Int = listMessagesCash.size
 
-    fun submitList(list: List<Common>) {
-        listMessagesCash.clear()
-        listMessagesCash.addAll(list)
-        notifyDataSetChanged()
+    fun addItemToBottom(item: Common, onSuccess: () -> Unit) {
+        if (!listMessagesCash.contains(item)) {
+            listMessagesCash.add(item)
+            notifyItemInserted(listMessagesCash.size)
+        }
+        onSuccess()
+    }
+    fun addItemToTop(item: Common, onSuccess: () -> Unit) {
+        if (!listMessagesCash.contains(item)) {
+            listMessagesCash.add(item)
+            listMessagesCash.sortBy { it.timeStamp.toString() }
+            notifyItemInserted(0)
+        }
+        onSuccess()
     }
 }
 
