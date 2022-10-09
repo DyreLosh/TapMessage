@@ -71,7 +71,7 @@ class OpenChatFragment : Fragment() {
         super.onResume()
         mSwipeRefresh = binding.chatSwipeRefresh
         mLayoutManager = LinearLayoutManager(this.context)
-        // initFields()
+       // initFields()
         initToolbar()
         initRecyclerView()
     }
@@ -87,6 +87,7 @@ class OpenChatFragment : Fragment() {
                 binding.voiceAndAttachLayout.visibility = View.GONE
             }
         })
+
     }
 
     private fun initRecyclerView() {
@@ -207,64 +208,25 @@ class OpenChatFragment : Fragment() {
             && resultCode == Activity.RESULT_OK && data != null
         ) {
             val url = CropImage.getActivityResult(data).uri
+            val messageKey =
+                FirebaseUtils.databaseRef.child(NODE_MESSAGES).child(FirebaseUtils.userUid)
+                    .child(bundleArgs.common.id).push().key.toString()
             val path =
-                FirebaseUtils.storageRootRef.child(FOLDER_PROFILE_IMAGE)
-                    .child(FirebaseUtils.userUid)
+                FirebaseUtils.storageRootRef.child(FOLDER_MESSAGES_IMAGES)
+                    .child(messageKey)
             putImageToStorage(url, path) {
                 getUrlFromStorage(path) {
-                    putUrlToDatabase(it) {
-                        Toast.makeText(
-                            requireContext(),
-                            "Фотография успешно загружено",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
-                        FirebaseUtils.USER.photoUrl = it
-
-                    }
+                    sendMessageAsImage(bundleArgs.common.id, it, messageKey)
+                    nSmoothScrollToPosition = true
                 }
             }
         }
-    }
-
-
-    fun putUrlToDatabase(url: String, function: () -> Unit) {
-        FirebaseUtils.databaseRef.child(NODE_USERS).child(FirebaseUtils.userUid)
-            .child(CHILD_PHOTO_URL)
-            .setValue(url)
-            .addOnSuccessListener { function() }
-            .addOnFailureListener {
-                Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
-            }
-    }
-
-    fun getUrlFromStorage(
-        path: StorageReference,
-        function: (url: String) -> Unit
-    ) {
-        path.downloadUrl.addOnSuccessListener { function(it.toString()) }
-            .addOnFailureListener {
-                Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
-            }
-    }
-
-    fun putImageToStorage(
-        url: Uri,
-        path: StorageReference,
-        function: () -> Unit
-    ) {
-        path.putFile(url).addOnSuccessListener { function() }
-            .addOnFailureListener {
-                Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
-            }
-
     }
 
     private fun changePhotoUser() {
         CropImage.activity()
             .setAspectRatio(1, 1)
             .setRequestedSize(600, 600)
-            .setCropShape(CropImageView.CropShape.OVAL)
             .start(activity as MainActivity, this)
     }
 

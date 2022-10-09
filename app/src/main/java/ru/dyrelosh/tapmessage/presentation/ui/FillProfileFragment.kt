@@ -90,39 +90,6 @@ class FillProfileFragment : Fragment() {
         }
     }
 
-
-    fun putUrlToDatabase(url: String, function: () -> Unit) {
-        FirebaseUtils.databaseRef.child(NODE_USERS).child(preferenceManager.readUserId())
-            .child(CHILD_PHOTO_URL)
-            .setValue(url)
-            .addOnSuccessListener { function() }
-            .addOnFailureListener {
-                Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
-            }
-    }
-
-    fun getUrlFromStorage(
-        path: StorageReference,
-        function: (url: String) -> Unit
-    ) {
-        path.downloadUrl.addOnSuccessListener { function(it.toString()) }
-            .addOnFailureListener {
-                Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
-            }
-    }
-
-    fun putImageToStorage(
-        url: Uri,
-        path: StorageReference,
-        function: () -> Unit
-    ) {
-        path.putFile(url).addOnSuccessListener { function() }
-            .addOnFailureListener {
-                Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
-            }
-
-    }
-
     private fun changePhotoUser() {
         CropImage.activity()
             .setAspectRatio(1, 1)
@@ -148,31 +115,6 @@ class FillProfileFragment : Fragment() {
             .addOnFailureListener {
                 Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
             }
-
-//        databaseRef.child(NODE_USERS).child(preferenceManager.readUserId()).child(CHILD_FULLNAME)
-//            .setValue(binding.fullNameFillEditText.text.toString()).addOnFailureListener {
-//                Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
-//            }
-//
-//        databaseRef.child(NODE_USERS).child(preferenceManager.readUserId()).child(CHILD_PHONE)
-//            .setValue(binding.phoneFillEditText.text.toString()).addOnFailureListener {
-//                Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
-//            }
-//
-//        databaseRef.child(NODE_USERS).child(preferenceManager.readUserId()).child(CHILD_USERNAME)
-//            .setValue(binding.nicknameFillEditText.text.toString()).addOnFailureListener {
-//                Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
-//            }
-//        databaseRef.child(NODE_USERS).child(preferenceManager.readUserId()).child(CHILD_ID)
-//            .setValue(preferenceManager.readUserId()).addOnFailureListener {
-//                Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
-//            }
-//        databaseRef.child(NODE_USERS).child(preferenceManager.readUserId()).child(CHILD_EMAIL)
-//            .setValue(firebaseAuth.currentUser?.email.toString()).addOnFailureListener {
-//                Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
-//            }.addOnCompleteListener {
-//                findNavController().navigate(R.id.action_fillProfileFragment_to_registerResultFragment)
-//            }
 
         databaseRef.child(NODE_PHONES).child(binding.phoneFillEditText.text.toString())
             .setValue(preferenceManager.readUserId())

@@ -1,14 +1,12 @@
 package ru.dyrelosh.tapmessage.utils
 
 import android.annotation.SuppressLint
+import android.net.Uri
 import android.provider.ContactsContract
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
@@ -30,6 +28,7 @@ object FirebaseUtils {
 }
 
 const val TEXT_TYPE = "text"
+const val IMAGE_TYPE = "image"
 
 const val NODE_USERS = "users"
 const val NODE_EMAILS = "emails"
@@ -50,9 +49,11 @@ const val CHILD_TEXT = "text"
 const val CHILD_TYPE = "type"
 const val CHILD_FROM = "from"
 const val CHILD_TIMESTAMP = "timeStamp"
+const val CHILD_IMAGE_URL = "imageUrl"
+
 
 const val FOLDER_PROFILE_IMAGE = "profile_image"
-
+const val FOLDER_MESSAGES_IMAGES = "message_image"
 
 @SuppressLint("Range")
 fun initContacts() {
@@ -114,6 +115,56 @@ fun updatePhonesToDatabase(arrayContacts: ArrayList<Common>) {
             }
 
         })
+}
+
+fun sendMessageAsImage(receivingUserId: String, imageUrl: String, messageKey: String) {
+    val refDialogUser = "$NODE_MESSAGES/${FirebaseUtils.userUid}/$receivingUserId"
+    val refDialogReceivingUser = "$NODE_MESSAGES/$receivingUserId/${FirebaseUtils.userUid}"
+    val mapMessage = hashMapOf<String, Any>()
+    mapMessage[CHILD_FROM] = FirebaseUtils.userUid
+    mapMessage[CHILD_TYPE] = IMAGE_TYPE
+    mapMessage[CHILD_ID] = messageKey
+    mapMessage[CHILD_TIMESTAMP] = ServerValue.TIMESTAMP
+    mapMessage[CHILD_IMAGE_URL] = imageUrl
+
+    val mapDialog = hashMapOf<String, Any>()
+    mapDialog["$refDialogUser/$messageKey"] = mapMessage
+    mapDialog["$refDialogReceivingUser/$messageKey"] = mapMessage
+
+    FirebaseUtils.databaseRef.updateChildren(mapDialog).addOnSuccessListener {
+
+    }
+}
+fun putUrlToDatabase(url: String, function: () -> Unit) {
+    FirebaseUtils.databaseRef.child(NODE_USERS).child(FirebaseUtils.userUid)
+        .child(CHILD_PHOTO_URL)
+        .setValue(url)
+        .addOnSuccessListener { function() }
+        .addOnFailureListener {
+            Toast.makeText(APP_ACTIVITY, it.message.toString(), Toast.LENGTH_SHORT).show()
+        }
+}
+
+fun getUrlFromStorage(
+    path: StorageReference,
+    function: (url: String) -> Unit
+) {
+    path.downloadUrl.addOnSuccessListener { function(it.toString()) }
+        .addOnFailureListener {
+            Toast.makeText(APP_ACTIVITY, it.message.toString(), Toast.LENGTH_SHORT).show()
+        }
+}
+
+fun putImageToStorage(
+    url: Uri,
+    path: StorageReference,
+    function: () -> Unit
+) {
+    path.putFile(url).addOnSuccessListener { function() }
+        .addOnFailureListener {
+            Toast.makeText(APP_ACTIVITY, it.message.toString(), Toast.LENGTH_SHORT).show()
+        }
+
 }
 
 fun DataSnapshot.getCommonModel(): Common =

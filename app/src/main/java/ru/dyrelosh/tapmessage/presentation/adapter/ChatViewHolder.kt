@@ -15,4 +15,13 @@ class ChatViewHolder(private val binding: ItemMessageBinding): ViewHolder(bindin
     val blocReceiverUserMessage = binding.blocReceivedMessage
     val chatReceiverUserMessage = binding.chatReceivedMessage
     val chatReceiverUserMessageTime = binding.chatReceivedMessageTime
+
+    val blocReceiverImageMessage = binding.blocReceivedImageMessage
+    val chatReceivedImageMessage = binding.chatReceivedImageMessage
+    val chatReceivedImageTimeMessage = binding.chatImageTimeMessage
+
+    val blocImageMessage = binding.blocRImageMessage
+    val chatImageMessage = binding.chatImageMessage
+    val chatImageTimeMessage = binding.chatImageTimeMessage
+
 }

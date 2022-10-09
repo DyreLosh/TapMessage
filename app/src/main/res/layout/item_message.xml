@@ -13,6 +13,7 @@
         android:layout_width="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_max="300dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginStart="100dp"
         android:background="@drawable/user_message_background"
@@ -22,15 +23,17 @@
             android:id="@+id/chatUserMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="d"
-            android:gravity="end"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            app:layout_constraintWidth_max="wrap"
             android:layout_marginTop="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="start"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="3dp"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:textColor="@color/white" />
+            app:layout_constraintWidth_max="wrap"
+            tools:text="rtretertretertertreetrertertd" />
 
         <TextView
             android:id="@+id/chatUserMessageTime"
@@ -43,7 +46,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginTop="3dp"
             android:paddingBottom="5dp"
-            android:textSize="11dp"
+            android:textSize="13sp"
             app:layout_constraintTop_toBottomOf="@+id/chatUserMessage"
             app:layout_constraintEnd_toEndOf="parent"
             android:textColor="@color/white" />
@@ -56,6 +59,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginEnd="100dp"
+        app:layout_constraintWidth_max="300dp"
         android:background="@drawable/people_message_background"
         android:layout_height="wrap_content">
 
@@ -63,10 +67,12 @@
             android:id="@+id/chatReceivedMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="df sdf sdf sdfa"
+            tools:text="df sdf sdf sdfdfa"
             android:gravity="start"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
+            android:paddingTop="3dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textSize="16sp"
             android:layout_marginTop="5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -81,11 +87,77 @@
             android:layout_marginEnd="10dp"
             android:layout_marginTop="3dp"
             android:paddingBottom="5dp"
-            android:textSize="11sp"
+            android:textSize="13sp"
             app:layout_constraintTop_toBottomOf="@+id/chatReceivedMessage"
             app:layout_constraintEnd_toEndOf="parent"
             android:textColor="@color/white" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/blocReceivedImageMessage"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content">
 
+        <ImageView
+            android:id="@+id/chatReceivedImageMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/profile_blank"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_max="200dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_max="200dp" />
+
+        <TextView
+            android:id="@+id/chatReceivedImageTimeMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/black"
+            android:background="@color/white"
+            android:textSize="16sp"
+            android:padding="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="00:00" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/blocRImageMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/chatImageMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/profile_blank"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_max="200dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_max="200dp" />
+
+        <TextView
+            android:id="@+id/chatImageTimeMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="start"
+            android:padding="2dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="00:00" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
