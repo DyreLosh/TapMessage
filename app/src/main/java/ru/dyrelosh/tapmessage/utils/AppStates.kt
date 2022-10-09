@@ -10,8 +10,11 @@ enum class AppStates(val state: String) {
 
     companion object {
         fun updateState(appStates: AppStates, context: Context) {
-            databaseRef.child(NODE_USERS).child(PreferenceManager(context).readUserId())
-                .child(CHILD_STATE).setValue(appStates.state)
+            if (FirebaseUtils.userUid != null) {
+                databaseRef.child(NODE_USERS).child(PreferenceManager(context).readUserId())
+                    .child(CHILD_STATE).setValue(appStates.state)
+            }
+
         }
     }
 }

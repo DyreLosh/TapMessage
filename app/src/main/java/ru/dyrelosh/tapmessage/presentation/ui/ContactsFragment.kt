@@ -72,7 +72,13 @@ class ContactsFragment : Fragment() {
                 mRefUserListener = object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         val contact = snapshot.getCommonModel()
-                        holder.name.text = contact.fullName
+                        if (contact.fullName.isEmpty()) {
+                            holder.name.text = model.fullName
+                        }
+                        else {
+                            holder.name.text = contact.fullName
+
+                        }
                         holder.status.text = contact.state
                         Glide.with(binding.root)
                             .load(contact.photoUrl)

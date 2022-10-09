@@ -29,11 +29,14 @@ object FirebaseUtils {
 
 }
 
+const val TEXT_TYPE = "text"
+
 const val NODE_USERS = "users"
 const val NODE_EMAILS = "emails"
 const val NODE_USERNAMES = "usernames"
 const val NODE_PHONES = "phones"
 const val NODE_PHONES_CONTACTS = "phones_contacts"
+const val NODE_MESSAGES = "messages"
 
 
 const val CHILD_ID = "id"
@@ -43,6 +46,10 @@ const val CHILD_FULLNAME = "fullName"
 const val CHILD_PHONE = "phone"
 const val CHILD_STATE = "state"
 const val CHILD_PHOTO_URL = "photoUrl"
+const val CHILD_TEXT = "text"
+const val CHILD_TYPE = "type"
+const val CHILD_FROM = "from"
+const val CHILD_TIMESTAMP = "timeStamp"
 
 const val FOLDER_PROFILE_IMAGE = "profile_image"
 
@@ -89,14 +96,14 @@ fun updatePhonesToDatabase(arrayContacts: ArrayList<Common>) {
                                 PreferenceManager(
                                     APP_ACTIVITY
                                 ).readUserId()
-                            ).child(data.value.toString()).child(CHILD_ID).setValue(data.value.toString()).addOnFailureListener {
-                                Toast.makeText(APP_ACTIVITY, it.message.toString(), Toast.LENGTH_SHORT).show()
-                            }.addOnSuccessListener {
-                                Toast.makeText(APP_ACTIVITY, "OK", Toast.LENGTH_SHORT).show()
+                            ).child(data.value.toString()).child(CHILD_ID)
+                                .setValue(data.value.toString()).addOnFailureListener {
+                                Toast.makeText(
+                                    APP_ACTIVITY,
+                                    it.message.toString(),
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
-                        }
-                        else {
-                            Toast.makeText(APP_ACTIVITY, data.key.toString(), Toast.LENGTH_SHORT).show()
                         }
                     }
                 }

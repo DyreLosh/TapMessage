@@ -7,13 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".presentation.ui.OpenChatFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/materialCardView2"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/openChatRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/chat_layout_corner"
-        app:cardCornerRadius="50dp"
-
+        tools:listitem="@layout/item_message"
+        android:overScrollMode="never"
+        android:clipToPadding="false"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintTop_toBottomOf="@+id/materialToolbar" />
 
@@ -27,15 +31,17 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/openChatBackButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_back"
             app:tint="@color/white" />
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/openChatImage"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/profile_blank"
+            tools:src="@drawable/profile_blank"
             android:layout_marginStart="32dp"/>
 
         <LinearLayout
@@ -45,6 +51,7 @@
             android:layout_marginStart="8dp">
 
             <TextView
+                android:id="@+id/openChatName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Динар Чураков"
@@ -53,6 +60,7 @@
                 android:fontFamily="@font/cocomat_regular"
                 android:textStyle="bold"/>
             <TextView
+                android:id="@+id/openChatState"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="в сети"
@@ -71,21 +79,95 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
-            android:background="@color/blue"
-            android:backgroundTint="@color/blue"
+        <EditText
+            android:id="@+id/sendMessageEditText"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/background_chat_input"
+            android:hint="Type a message"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="100dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <FrameLayout
+            android:id="@+id/sendMessageButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/background_chat_input"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/sendMessageEditText"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
+            <ImageView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/blue" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_gravity="center"
+                android:padding="8dp"
+                android:src="@drawable/ic_send" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/voiceAndAttachLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <FrameLayout
+                android:id="@+id/attachMessageButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/background_chat_input"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_attach" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/voiceMessageButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/background_chat_input"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_mic" />
+            </FrameLayout>
+        </LinearLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
