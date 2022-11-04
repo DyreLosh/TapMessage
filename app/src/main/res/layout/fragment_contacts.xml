@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/blue"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.ui.ContactsFragment">
+    tools:context=".presentation.ui.contacts.ContactsFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/contactsToolbar"
@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/cocomat_regular"
-            android:text="Контакты"
+            android:text="Contacts"
             android:textColor="@color/white"
             android:layout_gravity="center"
             android:textSize="20sp"/>

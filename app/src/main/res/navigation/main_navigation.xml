@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="ru.dyrelosh.tapmessage.presentation.ui.SplashFragment"
+        android:name="ru.dyrelosh.tapmessage.presentation.ui.splash.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="ru.dyrelosh.tapmessage.presentation.ui.RegisterFragment"
+        android:name="ru.dyrelosh.tapmessage.presentation.ui.register.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginMethodFragment"
-        android:name="ru.dyrelosh.tapmessage.presentation.ui.LoginMethodFragment"
+        android:name="ru.dyrelosh.tapmessage.presentation.ui.login_method.LoginMethodFragment"
         android:label="fragment_login_method"
         tools:layout="@layout/fragment_login_method" >
         <action
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="ru.dyrelosh.tapmessage.presentation.ui.LoginFragment"
+        android:name="ru.dyrelosh.tapmessage.presentation.ui.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -58,7 +58,7 @@
     </fragment>
     <fragment
         android:id="@+id/fillProfileFragment"
-        android:name="ru.dyrelosh.tapmessage.presentation.ui.FillProfileFragment"
+        android:name="ru.dyrelosh.tapmessage.presentation.ui.fill_profile.FillProfileFragment"
         android:label="fragment_fill_profile"
         tools:layout="@layout/fragment_fill_profile" >
         <action
@@ -76,7 +76,7 @@
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
-        android:name="ru.dyrelosh.tapmessage.presentation.ui.ChatFragment"
+        android:name="ru.dyrelosh.tapmessage.presentation.ui.chat.ChatFragment"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" >
         <action
@@ -92,7 +92,7 @@
     </fragment>
     <fragment
         android:id="@+id/newChatFragment"
-        android:name="ru.dyrelosh.tapmessage.presentation.ui.NewChatFragment"
+        android:name="ru.dyrelosh.tapmessage.presentation.ui.new_chat.NewChatFragment"
         android:label="fragment_new_chat"
         tools:layout="@layout/fragment_new_chat" />
     <fragment
@@ -102,12 +102,12 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="ru.dyrelosh.tapmessage.presentation.ui.SettingsFragment"
+        android:name="ru.dyrelosh.tapmessage.presentation.ui.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/openChatFragment"
-        android:name="ru.dyrelosh.tapmessage.presentation.ui.OpenChatFragment"
+        android:name="ru.dyrelosh.tapmessage.presentation.ui.open_chat.OpenChatFragment"
         android:label="fragment_open_chat"
         tools:layout="@layout/fragment_open_chat" >
         <argument
@@ -116,7 +116,7 @@
     </fragment>
     <fragment
         android:id="@+id/contactsFragment"
-        android:name="ru.dyrelosh.tapmessage.presentation.ui.ContactsFragment"
+        android:name="ru.dyrelosh.tapmessage.presentation.ui.contacts.ContactsFragment"
         android:label="fragment_contacts"
         tools:layout="@layout/fragment_contacts" >
         <action

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="@color/blue"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.OpenChatFragment">
+    tools:context=".presentation.ui.open_chat.OpenChatFragment">
 
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -14,6 +14,8 @@
         android:layout_height="0dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialToolbar">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -23,6 +25,7 @@
             android:background="@drawable/chat_layout_corner"
             android:clipToPadding="false"
             android:overScrollMode="never"
+            android:paddingBottom="10dp"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
             app:layout_constraintTop_toBottomOf="@+id/materialToolbar"
             tools:listitem="@layout/item_message" />
@@ -91,21 +94,21 @@
             android:id="@+id/sendMessageEditText"
             android:layout_width="0dp"
             android:layout_height="40dp"
+            android:layout_marginEnd="100dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/background_chat_input"
             android:hint="Type a message"
             android:imeOptions="actionDone"
             android:importantForAutofill="no"
             android:inputType="text"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="100dp"
+            android:layout_marginStart="8dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/attachMessageButton" />
 
 
         <FrameLayout
@@ -113,9 +116,11 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:focusable="true"
             android:background="@drawable/background_chat_input"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/voiceMessageButton"
             app:layout_constraintStart_toEndOf="@+id/sendMessageEditText"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -127,53 +132,50 @@
                 android:src="@drawable/ic_send" />
         </FrameLayout>
 
-        <LinearLayout
-            android:id="@+id/voiceAndAttachLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
 
+        <FrameLayout
+            android:id="@+id/attachMessageButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/background_chat_input"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="8dp"
+                android:src="@drawable/ic_attach" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/voiceMessageButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/background_chat_input"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <FrameLayout
-                android:id="@+id/attachMessageButton"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/background_chat_input"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="8dp"
+                android:src="@drawable/ic_mic" />
+        </FrameLayout>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_attach" />
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/voiceMessageButton"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/background_chat_input"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_mic" />
-            </FrameLayout>
-        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

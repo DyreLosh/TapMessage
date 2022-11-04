@@ -1,11 +1,8 @@
-package ru.dyrelosh.tapmessage.presentation.ui
+package ru.dyrelosh.tapmessage.presentation.ui.open_chat
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,20 +16,14 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ServerValue
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.storage.StorageReference
-import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
-import com.theartofdev.edmodo.cropper.CropImageView
-import ru.dyrelosh.tapmessage.R
 import ru.dyrelosh.tapmessage.databinding.FragmentOpenChatBinding
-import ru.dyrelosh.tapmessage.models.Common
 import ru.dyrelosh.tapmessage.models.User
 import ru.dyrelosh.tapmessage.presentation.adapter.ChatAdapter
+import ru.dyrelosh.tapmessage.presentation.ui.MainActivity
 import ru.dyrelosh.tapmessage.utils.*
 
 class OpenChatFragment : Fragment() {
@@ -71,7 +62,7 @@ class OpenChatFragment : Fragment() {
         super.onResume()
         mSwipeRefresh = binding.chatSwipeRefresh
         mLayoutManager = LinearLayoutManager(this.context)
-       // initFields()
+            // initFields()
         initToolbar()
         initRecyclerView()
     }
@@ -81,10 +72,12 @@ class OpenChatFragment : Fragment() {
             val string = binding.sendMessageEditText.text.toString()
             if (string.isEmpty()) {
                 binding.sendMessageEditText.visibility = View.GONE
-                binding.voiceAndAttachLayout.visibility = View.VISIBLE
+                binding.voiceMessageButton.visibility = View.VISIBLE
+                binding.attachMessageButton.visibility = View.VISIBLE
             } else {
                 binding.sendMessageEditText.visibility = View.VISIBLE
-                binding.voiceAndAttachLayout.visibility = View.GONE
+                binding.voiceMessageButton.visibility = View.GONE
+                binding.attachMessageButton.visibility = View.GONE
             }
         })
 
@@ -157,6 +150,7 @@ class OpenChatFragment : Fragment() {
                 Toast.makeText(requireContext(), "sd", Toast.LENGTH_SHORT).show()
             } else {
                 sendMessage(message, bundleArgs.common.id, TEXT_TYPE) {
+                    saveToMainList(bundleArgs.common.id, CHAT_TYPE)
                     binding.sendMessageEditText.setText("")
                 }
             }

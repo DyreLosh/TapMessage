@@ -58,6 +58,10 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+    override fun onStart() {
+        super.onStart()
+        AppStates.updateState(AppStates.ONLINE, this)
+    }
 
     override fun onStop() {
         super.onStop()

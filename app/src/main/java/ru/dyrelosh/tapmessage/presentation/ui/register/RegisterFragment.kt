@@ -1,4 +1,4 @@
-package ru.dyrelosh.tapmessage.presentation.ui
+package ru.dyrelosh.tapmessage.presentation.ui.register
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

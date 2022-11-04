@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.net.Uri
 import android.provider.ContactsContract
 import android.widget.Toast
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
@@ -27,29 +29,6 @@ object FirebaseUtils {
 
 }
 
-const val TEXT_TYPE = "text"
-const val IMAGE_TYPE = "image"
-
-const val NODE_USERS = "users"
-const val NODE_EMAILS = "emails"
-const val NODE_USERNAMES = "usernames"
-const val NODE_PHONES = "phones"
-const val NODE_PHONES_CONTACTS = "phones_contacts"
-const val NODE_MESSAGES = "messages"
-
-
-const val CHILD_ID = "id"
-const val CHILD_EMAIL = "email"
-const val CHILD_USERNAME = "username"
-const val CHILD_FULLNAME = "fullName"
-const val CHILD_PHONE = "phone"
-const val CHILD_STATE = "state"
-const val CHILD_PHOTO_URL = "photoUrl"
-const val CHILD_TEXT = "text"
-const val CHILD_TYPE = "type"
-const val CHILD_FROM = "from"
-const val CHILD_TIMESTAMP = "timeStamp"
-const val CHILD_IMAGE_URL = "imageUrl"
 
 
 const val FOLDER_PROFILE_IMAGE = "profile_image"
@@ -165,6 +144,23 @@ fun putImageToStorage(
             Toast.makeText(APP_ACTIVITY, it.message.toString(), Toast.LENGTH_SHORT).show()
         }
 
+}
+
+fun saveToMainList(id: String, type: String) {
+    val refUser = "$NODE_MAIN_LIST/${FirebaseUtils.userUid}/$id"
+    val refReceivedUser = "$NODE_MAIN_LIST/$id/${FirebaseUtils.userUid}"
+    val mapUser = hashMapOf<String, Any>()
+    val mapReceivedUser = hashMapOf<String, Any>()
+
+    mapUser[CHILD_ID] = id
+    mapUser[CHILD_TYPE] = type
+    mapReceivedUser[CHILD_ID] = FirebaseUtils.userUid
+    mapReceivedUser[CHILD_TYPE] = type
+    val commonMap = hashMapOf<String, Any>()
+    commonMap[refUser] = mapUser
+    commonMap[refReceivedUser] = mapReceivedUser
+
+    FirebaseUtils.databaseRef.updateChildren(commonMap)
 }
 
 fun DataSnapshot.getCommonModel(): Common =

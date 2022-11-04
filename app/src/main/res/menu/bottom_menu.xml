@@ -10,10 +10,6 @@
         android:title="Contacts"
         android:icon="@drawable/ic_people"/>
     <item
-        android:id="@+id/profileFragment"
-        android:title="Profile"
-        android:icon="@drawable/ic_person"/>
-    <item
         android:id="@+id/settingsFragment"
         android:title="Settings"
         android:icon="@drawable/ic_settings"/>

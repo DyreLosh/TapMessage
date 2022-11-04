@@ -1,4 +1,4 @@
-package ru.dyrelosh.tapmessage.presentation.ui
+package ru.dyrelosh.tapmessage.presentation.ui.splash
 
 import android.os.Bundle
 import android.os.Handler
@@ -7,10 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseUser
-import ru.dyrelosh.tapmessage.utils.PreferenceManager
 import ru.dyrelosh.tapmessage.R
 import ru.dyrelosh.tapmessage.databinding.FragmentSplashBinding
 import ru.dyrelosh.tapmessage.utils.FirebaseUtils
@@ -23,11 +21,7 @@ class SplashFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSplashBinding.inflate(inflater, container, false)
-        Toast.makeText(
-            requireContext(),
-            PreferenceManager(requireContext()).readUserId(),
-            Toast.LENGTH_SHORT
-        ).show()
+
         return binding.root
     }
 

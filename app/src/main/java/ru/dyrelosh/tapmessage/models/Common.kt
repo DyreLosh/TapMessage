@@ -15,9 +15,9 @@ data class Common(
     var type: String = "",
     var from: String = "",
     var timeStamp: Any = "",
-    var imageUrl: String = "empty"
+    var imageUrl: String = "empty",
 
-
+    var lastMessage: String = ""
 
 ) : java.io.Serializable {
     override fun equals(other: Any?): Boolean {

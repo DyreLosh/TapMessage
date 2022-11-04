@@ -1,8 +1,7 @@
-package ru.dyrelosh.tapmessage.presentation.ui
+package ru.dyrelosh.tapmessage.presentation.ui.fill_profile
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
@@ -18,6 +16,7 @@ import ru.dyrelosh.tapmessage.utils.PreferenceManager
 import ru.dyrelosh.tapmessage.R
 import ru.dyrelosh.tapmessage.utils.Validator
 import ru.dyrelosh.tapmessage.databinding.FragmentFillProfileBinding
+import ru.dyrelosh.tapmessage.presentation.ui.MainActivity
 import ru.dyrelosh.tapmessage.utils.*
 import ru.dyrelosh.tapmessage.utils.FirebaseUtils.databaseRef
 import ru.dyrelosh.tapmessage.utils.FirebaseUtils.firebaseAuth

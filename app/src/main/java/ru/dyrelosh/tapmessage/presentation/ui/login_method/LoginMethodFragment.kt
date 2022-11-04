@@ -1,4 +1,4 @@
-package ru.dyrelosh.tapmessage.presentation.ui
+package ru.dyrelosh.tapmessage.presentation.ui.login_method
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,9 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -20,7 +18,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.ktx.app
 import ru.dyrelosh.tapmessage.R
 import ru.dyrelosh.tapmessage.databinding.FragmentLoginMethodBinding
 
@@ -37,14 +34,12 @@ class LoginMethodFragment : Fragment() {
         binding = FragmentLoginMethodBinding.inflate(inflater, container, false)
 
         binding.signInWithGoogleInLoginMethod.setOnClickListener {
-            //signInWithGoogle()
+            findNavController().navigate(R.id.action_loginMethodFragment_to_registerFragment)
         }
         binding.signInWithPasswordMethodButton.setOnClickListener {
             findNavController().navigate(R.id.action_loginMethodFragment_to_loginFragment)
         }
-        binding.signUpButtonLoginMethod.setOnClickListener {
-            findNavController().navigate(R.id.action_loginMethodFragment_to_registerFragment)
-        }
+
         launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
             try {

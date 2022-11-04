@@ -17,41 +17,46 @@
 
 
         <ImageView
+            android:id="@+id/chatListImage"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@drawable/profile_blank" />
     </com.google.android.material.card.MaterialCardView>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/chatListName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="12dp"
         android:fontFamily="@font/cocomat_regular"
         android:text="Dinar Churakov"
         android:textColor="@color/black"
+        android:layout_marginTop="4dp"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/materialCardView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/chatListLastMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLength="40"
         android:fontFamily="@font/cocomat_regular"
         android:maxLines="1"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="12dp"
         android:text="sdaf sdf asd fdasf dasf sdaf sadf asdf asdf sadf sadf sdf  dsf sdfsadf sdf sd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/materialCardView"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/chatListName" />
 
     <TextView
+        android:id="@+id/chatListTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/cocomat_regular"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/cocomat_bold"
         android:text="21.09.2022 14:05"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

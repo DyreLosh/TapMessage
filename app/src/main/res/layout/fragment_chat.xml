@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/blue"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.ui.ChatFragment">
+    tools:context=".presentation.ui.chat.ChatFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/materialToolbar4"
@@ -20,13 +20,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/cocomat_regular"
-            android:text="Профиль"
+            android:text="Chats"
             android:textColor="@color/white"
             android:layout_gravity="center"
             android:textSize="20sp"/>
     </com.google.android.material.appbar.MaterialToolbar>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chatListRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -45,7 +46,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:backgroundTint="@color/blue"
-        android:src="@drawable/ic_edit"
+        android:src="@drawable/ic_edit_white"
         android:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
