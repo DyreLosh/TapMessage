@@ -14,7 +14,6 @@ class SettingsFragment : Fragment() {
 
     lateinit var binding: FragmentSettingsBinding
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -22,7 +21,7 @@ class SettingsFragment : Fragment() {
         binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val preferenceManager = PreferenceManager(requireContext())
 
-        binding.exitText.setOnClickListener {
+        binding.exitButton.setOnClickListener {
             AppStates.updateState(AppStates.OFFLINE, requireContext())
             PreferenceManager(requireContext()).deleteUserId()
             FirebaseUtils.firebaseAuth.signOut()

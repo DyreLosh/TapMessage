@@ -43,7 +43,6 @@ class LoginMethodFragment : Fragment() {
         launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
             try {
-
                 val account = task.getResult(ApiException::class.java)
                 if (account != null ) {
                     firebaseAuthWithGoogle(account.idToken!!)
@@ -54,10 +53,7 @@ class LoginMethodFragment : Fragment() {
         }
         auth = Firebase.auth
         return binding.root
-
-
     }
-
     private fun getClient(): GoogleSignInClient {
         val gso = GoogleSignInOptions
             .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -65,11 +61,6 @@ class LoginMethodFragment : Fragment() {
             .requestEmail()
             .build()
         return GoogleSignIn.getClient(requireContext(), gso)
-    }
-
-    private fun signInWithGoogle() {
-        val signInClient = getClient()
-        launcher.launch(signInClient.signInIntent)
     }
 
     private fun firebaseAuthWithGoogle(idToken: String) {
@@ -86,6 +77,4 @@ class LoginMethodFragment : Fragment() {
             }
         }
     }
-
-
 }

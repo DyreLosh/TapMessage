@@ -41,10 +41,6 @@ class ChatFragment : Fragment() {
     private fun initRecyclerView() {
         mRecyclerView = binding.chatListRecyclerView
         mAdapter = MainListAdapter()
-        mAdapter.onItemClick = { id ->
-
-
-        }
 
         mRefMainList.addListenerForSingleValueEvent(AppValueEventListener { dataSnapshot ->
             mListItems = dataSnapshot.children.map { it.getCommonModel() }

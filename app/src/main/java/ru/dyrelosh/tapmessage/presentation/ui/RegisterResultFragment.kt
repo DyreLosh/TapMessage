@@ -18,9 +18,7 @@ class RegisterResultFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentRegisterResultBinding.inflate(inflater, container, false)
-        binding.resultToChatButton.setOnClickListener {
-            findNavController().navigate(R.id.action_registerResultFragment_to_chatFragment)
-        }
+
         return binding.root
     }
 

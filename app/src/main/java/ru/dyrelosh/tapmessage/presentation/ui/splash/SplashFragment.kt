@@ -16,12 +16,13 @@ import ru.dyrelosh.tapmessage.utils.FirebaseUtils
 class SplashFragment : Fragment() {
 
     lateinit var binding: FragmentSplashBinding
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSplashBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
@@ -37,8 +38,6 @@ class SplashFragment : Fragment() {
             else {
                 findNavController().navigate(R.id.action_splashFragment_to_loginMethodFragment)
             }
-
         }, 3000)
-
     }
 }
